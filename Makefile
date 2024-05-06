@@ -13,9 +13,13 @@ help: ## Display help
 dm: ## Drop merged branches
 	git checkout master && git branch --merged | grep -v \* | xargs git branch -D
 
+.PHONY: construct
+build-construct: ## Build images
+	$(dc) up -d --build
+
 .PHONY: up
 up: ## Start application
-	$(dc) up -d --build
+	$(dc) up -d
 
 .PHONY: down
 down: ## Stop application

@@ -1,10 +1,10 @@
 version: "3.8"
 services:
   app:
-    build: ./.docker/nginx
+    build: ./.docker/app
     container_name: minimalist-app
     volumes:
-      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./.docker/app/default.conf:/etc/nginx/conf.d/default.conf
       - .:/var/www/html
     ports:
       - "80:80"
@@ -45,7 +45,7 @@ services:
     build: ./.docker/adminer
     environment:
       - ADMINER_DEFAULT_SERVER=${DB_HOST}
-      - ADMINER_DEFAULT_USER=${DB_USER}
+      - ADMINER_DEFAULT_USER=${DB_USERNAME}
       - ADMINER_DEFAULT_PASSWORD=${DB_PASSWORD}
       - ADMINER_DEFAULT_PORT=${DB_PORT}
     restart: always
