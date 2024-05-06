@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+use App\Commands\SetWebhookCommand;
+use App\Commands\TestCommand;
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+$application->add(new SetWebhookCommand());
+$application->add(new TestCommand());
+
+$application->run();
