@@ -54,6 +54,9 @@ $routes($app);
 /** @var SettingsInterface $settings */
 $settings = $container->get(SettingsInterface::class);
 
+$eloquent = require __DIR__ . '/../app/eloquent.php';
+$eloquent($app, $settings);
+
 $displayErrorDetails = $settings->get('displayErrorDetails');
 $logError = $settings->get('logError');
 $logErrorDetails = $settings->get('logErrorDetails');
