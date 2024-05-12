@@ -4,7 +4,6 @@ namespace App\Core;
 
 use App\Enums\ParseMode;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -36,17 +35,18 @@ class Telegram
         }
     }
 
-    public function sendMessage(string $text): ?array
+    public function sendMessage(string $text, int $chatId): ?array
     {
         try {
             return GuzzleHelper::responseToArray($this->client->post('sendMessage', [
                 'json' => [
                     'text' => $text,
+                    'chat_id' => $chatId,
                     'parse_mode' => ParseMode::MarkdownV2->value,
                 ],
             ]));
         } catch (RequestException $e) {
-            $this->log->error($e->getMessage());
+            $this->log->error($e->getMessage(), ['text' => $text, 'chat_id' => $chatId]);
 
             return null;
         }
