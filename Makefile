@@ -25,13 +25,13 @@ up: ## Start application
 down: ## Stop application
 	$(dc) down
 
-.PHONY: php-console
-php-console: ## Go into php console
-	$(de) php /bin/bash
-
 .PHONY: app-console
 app-console: ## Go into app console
 	$(de) app /bin/bash
+
+.PHONY: webserver-console
+webserver-console: ## Go into webserver console
+	$(de) webserver /bin/bash
 
 .PHONY: db-console
 db-console: ## Go into db console

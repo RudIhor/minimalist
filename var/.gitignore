@@ -1,5 +1,4 @@
 .env
-.docker/db/data
 vendor
 .idea
 var/cache
