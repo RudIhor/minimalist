@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\TelegramCommands;
 
-use App\Core\Telegram;
 use App\Entities\Update;
 use App\Models\User;
+use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StartCommand extends AbstractCommand
@@ -14,27 +14,21 @@ class StartCommand extends AbstractCommand
     /**
      * @param Update $update
      * @return void
-     * @throws \Psr\Container\ContainerExceptionInterface
-     * @throws \Psr\Container\NotFoundExceptionInterface
+     * @throws GuzzleException
+     * @throws \JsonException
      */
-    public function execute(Update $update)
+    public function execute(Update $update): void
     {
-        /** @var Telegram $telegram */
-        $telegram = $this->app->getContainer()->get(Telegram::class);
-        /** @var TranslatorInterface $translator */
-        $translator = $this->app->getContainer()->get(TranslatorInterface::class);
         // Move to action
         User::query()->updateOrCreate([
-            'first_name' => $update->message->from->first_name,
-            'last_name' => $update->message->from->last_name,
+            'first_name' => $update->message->from->firstName,
+            'last_name' => $update->message->from->lastName,
             'username' => $update->message->from->username,
-            'language_code' => $update->message->from->language_code,
-            'is_premium' => $update->message->from->is_premium,
+            'language_code' => $update->message->from->languageCode,
+            'chat_id' => $update->message->chat->id,
+            'is_premium' => $update->message->from->isPremium,
         ]);
 
-        // Hello and welcome to MinimaList.
-        // Todo Lists in Telegram!
-        // Give it a shot: /task
-//        $this->telegram->sendMessage('*Привіт*', $);
+        $this->telegramService->sendMessage($this->translator->trans('commands.start'), $update->message->chat->id);
     }
 }

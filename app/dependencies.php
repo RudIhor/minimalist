@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Application\Settings\SettingsInterface;
-use App\Core\Telegram;
+use App\Core\TelegramService;
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -30,14 +30,14 @@ return function (ContainerBuilder $containerBuilder) {
 
             return $logger;
         },
-        Telegram::class => function () {
-            return new Telegram();
+        TelegramService::class => function () {
+            return new TelegramService();
         },
         TranslatorInterface::class => function () {
             $translator = new Translator($_ENV['APP_LOCALE']);
             $translator->addLoader('array', new PhpFileLoader());
-            $translator->addResource('array', dirname(__DIR__) . '/translations/en/telegram.php', 'en');
-            $translator->addResource('array', dirname(__DIR__) . '/translations/uk/telegram.php', 'uk');
+            $translator->addResource('array', dirname(__DIR__) . '/resources/languages/en/telegram.php', 'en');
+            $translator->addResource('array', dirname(__DIR__) . '/resources/languages/uk/telegram.php', 'uk');
 
             return $translator;
         }

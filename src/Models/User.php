@@ -7,7 +7,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @public int $id
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $username
+ * @property string $language_code
+ * @property int $is_premium
+ * @property int $chat_id
  */
 class User extends Model
 {
@@ -17,5 +23,6 @@ class User extends Model
         'username',
         'language_code',
         'is_premium',
+        'chat_id',
     ];
 }

@@ -8,11 +8,11 @@ readonly class User
 {
     protected function __construct(
         public int $id,
-        public string $first_name,
-        public ?string $last_name,
+        public string $firstName,
+        public ?string $lastName,
         public ?string $username,
-        public string $language_code,
-        public bool $is_premium
+        public string $languageCode,
+        public bool $isPremium
     ) {
     }
 
