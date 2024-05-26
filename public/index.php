@@ -6,14 +6,20 @@ use App\Application\Handlers\HttpErrorHandler;
 use App\Application\Handlers\ShutdownHandler;
 use App\Application\ResponseEmitter\ResponseEmitter;
 use App\Application\Settings\SettingsInterface;
+use App\Core\TelegramService;
 use DI\ContainerBuilder;
 use Dotenv\Dotenv;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 
 require __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../app/constants.php';
 
-$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+session_start();
+
+$dotenv = Dotenv::createImmutable(BASE_PATH);
 $dotenv->load();
 
 // Instantiate PHP-DI ContainerBuilder
@@ -81,7 +87,22 @@ $app->addBodyParsingMiddleware();
 
 // Add Error Middleware
 $errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, $logError, $logErrorDetails);
-$errorMiddleware->setDefaultErrorHandler($errorHandler);
+$customErrorHandler = function (ServerRequestInterface $request, Throwable $exception) use ($app) {
+    $logger = $app->getContainer()->get(LoggerInterface::class);
+    $logger?->error($exception->getMessage());
+
+    if (!empty($_SESSION['chat_id'])) {
+        /** @var TelegramService $telegramService */
+        $telegramService = $app->getContainer()->get(TelegramService::class);
+        $telegramService->sendMessage('Houston, we have a problem', $_SESSION['chat_id']);
+    }
+
+    $response = $app->getResponseFactory()->createResponse();
+    $response->getBody()->write(json_encode(['error' => $exception->getMessage()], JSON_UNESCAPED_UNICODE));
+
+    return $response;
+};
+$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
 
 // Run App & Emit Response
 $response = $app->handle($request);
