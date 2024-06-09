@@ -11,7 +11,7 @@ final class CreateUsersTable extends AbstractMigration
         $this->table('users')
             ->addColumn('first_name', 'string', ['limit' => 255])
             ->addColumn('last_name', 'string', ['limit' => 255, 'default' => null])
-            ->addColumn('user_name', 'string', ['limit' => 255, 'default' => null])
+            ->addColumn('username', 'string', ['limit' => 255, 'default' => null])
             ->addColumn('is_premium', 'boolean', ['signed' => false])
             ->addColumn('language_code', 'string', ['limit' => 10])
             ->addColumn('chat_id', 'biginteger')

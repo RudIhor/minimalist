@@ -38,6 +38,8 @@ return function (ContainerBuilder $containerBuilder) {
             $translator->addLoader('array', new PhpFileLoader());
             $translator->addResource('array', dirname(__DIR__) . '/resources/languages/en/telegram.php', 'en');
             $translator->addResource('array', dirname(__DIR__) . '/resources/languages/uk/telegram.php', 'uk');
+            $translator->addResource('array', dirname(__DIR__) . '/resources/languages/ru/telegram.php', 'ru');
+            $translator->addResource('array', dirname(__DIR__) . '/resources/languages/es/telegram.php', 'es');
 
             return $translator;
         }

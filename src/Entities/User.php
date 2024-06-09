@@ -11,7 +11,7 @@ readonly class User
         public string $firstName,
         public ?string $lastName,
         public ?string $username,
-        public string $languageCode,
+        public ?string $languageCode,
         public bool $isPremium
     ) {
     }
@@ -23,7 +23,7 @@ readonly class User
             $data['first_name'],
             $data['last_name'] ?? null,
             $data['username'] ?? null,
-            $data['language_code'],
+            $data['language_code'] ?? null,
             $data['is_premium'] ?? false,
         );
     }

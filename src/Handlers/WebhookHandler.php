@@ -6,6 +6,7 @@ namespace App\Handlers;
 
 use App\Entities\Update;
 use App\Enums\AvailableCommand;
+use App\Models\User;
 use App\Services\TelegramServices\AbstractService;
 use App\TelegramCommands\AbstractCommand;
 use App\TelegramCommands\NotFoundCommand;
@@ -18,13 +19,16 @@ readonly class WebhookHandler
     public function __construct(public App $app, array $data)
     {
         $this->update = Update::from($data);
-        $_SESSION['chat_id'] = $this->update->message->chat->id;
-        $_SESSION['language_code'] = $this->update->message->from->languageCode;
+        $_SESSION['chat_id'] = $this->update->message?->chat->id ?? $this->update->callbackQuery?->message->chat->id;
+        $_SESSION['language_code'] = $this->update->message?->from->languageCode ?? User::byChatId($_SESSION['chat_id'])->first()->language_code;
     }
 
     public function handle(): void
     {
-        $text = $this->update->message->text;
+        $text = $this->update->message?->text;
+        if (!empty($this->update->callbackQuery)) {
+            $data = $this->update->callbackQuery->data;
+        }
         if (!empty($this->update->message->replyToMessage)) {
             $steps = require(BASE_PATH . '/resources/steps.php');
             $questionText = $this->update->message->replyToMessage->text;

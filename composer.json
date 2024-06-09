@@ -64,6 +64,7 @@
         }
     },
     "scripts": {
-        "init-bot": "php bin/console telegram:set-webhook && php bin/console telegram:set-commands"
+        "init-bot": "php bin/console telegram:set-webhook && php bin/console telegram:set-commands",
+        "migrate": "./vendor/bin/phinx migrate"
     }
 }

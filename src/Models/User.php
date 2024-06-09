@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\CustomQueryBuilders\TemporaryActionBuilder;
+use App\CustomQueryBuilders\UserBuilder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $language_code
  * @property int $is_premium
  * @property int $chat_id
+ * @method static UserBuilder byChatId($value)
  */
 class User extends Model
 {
@@ -25,4 +28,13 @@ class User extends Model
         'is_premium',
         'chat_id',
     ];
+
+    /**
+     * @param $query
+     * @return UserBuilder
+     */
+    public function newEloquentBuilder($query): UserBuilder
+    {
+        return new UserBuilder($query);
+    }
 }

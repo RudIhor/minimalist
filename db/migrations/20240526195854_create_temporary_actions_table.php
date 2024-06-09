@@ -16,7 +16,6 @@ final class CreateTemporaryActionsTable extends AbstractMigration
             ->addColumn('data', 'json')
             ->addColumn('created_at', 'datetime')
             ->addColumn('updated_at', 'datetime')
-            ->addIndex('chat_id', ['unique' => true])
             ->save();
     }
 

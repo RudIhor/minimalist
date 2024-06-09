@@ -16,8 +16,12 @@ readonly class Message
     ) {
     }
 
-    public static function from(array $data): Message
+    public static function from(?array $data): ?Message
     {
+        if (empty($data)) {
+            return null;
+        }
+
         return new self(
             $data['message_id'],
             User::from($data['from']),

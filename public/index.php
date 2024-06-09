@@ -89,7 +89,7 @@ $app->addBodyParsingMiddleware();
 $errorMiddleware = $app->addErrorMiddleware($displayErrorDetails, $logError, $logErrorDetails);
 $customErrorHandler = function (ServerRequestInterface $request, Throwable $exception) use ($app) {
     $logger = $app->getContainer()->get(LoggerInterface::class);
-    $logger?->error($exception->getMessage());
+    $logger?->error($exception->getMessage() . ' ' . $exception->getFile() . ' ' . $exception->getLine());
 
     if (!empty($_SESSION['chat_id'])) {
         /** @var TelegramService $telegramService */

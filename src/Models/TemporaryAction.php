@@ -18,11 +18,6 @@ use Illuminate\Database\Eloquent\Model;
  */
 class TemporaryAction extends Model
 {
-    public function newEloquentBuilder($query): TemporaryActionBuilder
-    {
-        return new TemporaryActionBuilder($query);
-    }
-
     protected $fillable = [
         'chat_id',
         'data',
@@ -31,4 +26,13 @@ class TemporaryAction extends Model
     protected $casts = [
         'data' => CustomDataCast::class,
     ];
+
+    /**
+     * @param $query
+     * @return TemporaryActionBuilder
+     */
+    public function newEloquentBuilder($query): TemporaryActionBuilder
+    {
+        return new TemporaryActionBuilder($query);
+    }
 }
