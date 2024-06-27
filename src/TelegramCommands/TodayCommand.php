@@ -7,6 +7,8 @@ namespace App\TelegramCommands;
 use App\DataTransferObjects\ReplyMarkups\InlineKeyboardButtonDTO;
 use App\DataTransferObjects\ReplyMarkups\InlineKeyboardMarkupDTO;
 use App\Entities\Update;
+use Carbon\Carbon;
+use DateTimeInterface;
 
 class TodayCommand extends AbstractCommand
 {
@@ -18,15 +20,17 @@ class TodayCommand extends AbstractCommand
      */
     public function execute(Update $update): void
     {
+        $date = Carbon::now()->today()->format(DateTimeInterface::ATOM);
+
         $this->telegramService->sendMessage(
-            "📅 *Today's Tasks*\n\nHere you can manage all your tasks for today\. Use the buttons below to quickly add, complete, view, or delete your tasks\.",
+            $this->translator->trans('commands.today'),
             $update->message->chat->id,
             InlineKeyboardMarkupDTO::make([
-                InlineKeyboardButtonDTO::make('➕ Add Task', callback_data: 'add-task-for-today'),
-                InlineKeyboardButtonDTO::make('✅ Complete Task', callback_data: '1'),
+                InlineKeyboardButtonDTO::make('➕ Add Task', callback_data: $date . '/add'),
+                InlineKeyboardButtonDTO::make('✅ Complete Task', callback_data: $date . '/complete'),
                 [
-                    InlineKeyboardButtonDTO::make('🗑️ Delete Task', callback_data: '2'),
-                    InlineKeyboardButtonDTO::make('👀 View Tasks', callback_data: '3'),
+                    InlineKeyboardButtonDTO::make('🗑️ Delete Task', callback_data: $date . '/delete'),
+                    InlineKeyboardButtonDTO::make('👀 View Tasks', callback_data: $date . '/view'),
                 ],
             ])
         );

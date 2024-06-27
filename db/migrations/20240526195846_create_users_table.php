@@ -17,6 +17,7 @@ final class CreateUsersTable extends AbstractMigration
             ->addColumn('chat_id', 'biginteger')
             ->addColumn('created_at', 'datetime')
             ->addColumn('updated_at', 'datetime')
+            ->addIndex('chat_id', ['unique' => true])
             ->save();
     }
 

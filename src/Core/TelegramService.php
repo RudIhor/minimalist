@@ -13,6 +13,7 @@ use JsonException;
 class TelegramService
 {
     private Client $client;
+    private array $nonValidCharacters = ['.', '!', ':', '-', '(', ')'];
 
     public function __construct()
     {
@@ -49,7 +50,7 @@ class TelegramService
     public function sendMessage(string $text, int $chatId, ?AbstractReplyMarkup $replyMarkup = null): ?array
     {
         $data = [
-            'text' => $text,
+            'text' => $this->escapeTelegramCharacters($text),
             'chat_id' => $chatId,
             'parse_mode' => ParseMode::MarkdownV2->value,
         ];
@@ -94,5 +95,20 @@ class TelegramService
                 'commands' => $commands,
             ],
         ]));
+    }
+
+    /**
+     * Escape non-valid characters for Telegram API.
+     *
+     * @param string $text
+     * @return array|string
+     */
+    private function escapeTelegramCharacters(string $text): array|string
+    {
+        foreach ($this->nonValidCharacters as $character) {
+            $text = str_replace($character, sprintf("\%s", $character), $text);
+        }
+
+        return $text;
     }
 }

@@ -51,6 +51,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
+      - /.docker/mysql/mysql.cnf:/etc/mysql/conf.d/mysql.cnf
       - db_data:/var/lib/mysql
     networks:
       - minimalist-db-network
