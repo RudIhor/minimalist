@@ -29,7 +29,7 @@ Hergestellt mit ❤️ in 🇺🇦
 END;
 
 $helpCommandText = <<<EOF
-Willkommen bei Minimalist! Ihr einfacher und schlanker Aufgabenmanager auf Telegram. Hier ist eine Liste von Befehlen, die Ihnen helfen, das Beste aus Ihrer Erfahrung herauszuholen:
+Minimalist ist ein einfacher und übersichtlicher Task-Manager in Telegram. Hier ist eine Liste von Befehlen, die Ihnen den Einstieg erleichtern sollen:
 
 Befehle:
 

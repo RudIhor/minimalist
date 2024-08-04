@@ -29,7 +29,7 @@ Zrobione z ❤️ w 🇺🇦
 END;
 
 $helpCommandText = <<<EOF
-Witaj w Minimalist! Twój prosty i zgrabny menedżer zadań na Telegramie. Oto lista poleceń, które pomogą Ci jak najlepiej wykorzystać to narzędzie:
+Minimalist to prosty i zwięzły menedżer zadań w Telegramie. Oto lista poleceń ułatwiających rozpoczęcie pracy:
 
 Polecenia:
 
