@@ -14,6 +14,8 @@ class TestCommand extends AbstractCommand
 {
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $output->writeln('Test command');
+
         return Command::SUCCESS;
     }
 }

@@ -7,7 +7,7 @@ namespace App\Entities;
 readonly class Message
 {
     protected function __construct(
-        public int $messageId,
+        public int $id,
         public User $from,
         public int $date,
         public Chat $chat,

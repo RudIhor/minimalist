@@ -28,20 +28,20 @@ enum AvailableCommand: string
     {
         return [
             [
-                'command' => '/help',
-                'description' => 'All commands',
-            ],
-            [
                 'command' => '/today',
-                'description' => 'Today | Hoy | Сьогодні | Сегодня',
+                'description' => 'Today | Сьогодні | Hoy | Сегодня | Бүгін | Dzisiaj | Heute | Aujourd\'hui',
             ],
             [
                 'command' => '/tomorrow',
-                'description' => 'Tomorrow | Mañana | Завтра | Завтра',
+                'description' => 'Tomorrow | Завтра | Mañana | Завтра | Ертең | Jutro | Morgen | Demain',
             ],
             [
                 'command' => '/future',
-                'description' => 'Future | Futura | Майбутнє | Будущее'
+                'description' => 'Future | Майбутнє | Futura | Будущее | Болашақ | Dzisiaj | Zukunft | Avenir'
+            ],
+            [
+                'command' => '/help',
+                'description' => 'Help | Помощь | Ayuda | Допомога | Көмектесіңдер | मदद | Helfen | Aide',
             ],
         ];
     }

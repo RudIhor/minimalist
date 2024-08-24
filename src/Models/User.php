@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\CustomQueryBuilders\TemporaryActionBuilder;
-use App\CustomQueryBuilders\UserBuilder;
+use App\CustomEloquentBuilders\CommonBuilder;
+use App\CustomEloquentBuilders\UserBuilder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * @property int $id
@@ -16,7 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $language_code
  * @property int $is_premium
  * @property int $chat_id
- * @method static UserBuilder byChatId($value)
+ * @property-read Collection $tasks
+ * @method static CommonBuilder byChatId(int $value)
  */
 class User extends Model
 {
@@ -29,12 +32,21 @@ class User extends Model
         'chat_id',
     ];
 
+    protected $casts = [
+        'is_premium' => 'boolean',
+    ];
+
     /**
      * @param $query
-     * @return UserBuilder
+     * @return CommonBuilder
      */
-    public function newEloquentBuilder($query): UserBuilder
+    public function newEloquentBuilder($query): CommonBuilder
     {
-        return new UserBuilder($query);
+        return new CommonBuilder($query);
+    }
+
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class, 'chat_id', 'chat_id');
     }
 }

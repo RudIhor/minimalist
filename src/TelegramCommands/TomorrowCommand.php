@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\TelegramCommands;
 
-use App\DataTransferObjects\ReplyMarkups\InlineKeyboardButtonDTO;
-use App\DataTransferObjects\ReplyMarkups\InlineKeyboardMarkupDTO;
 use App\Entities\Update;
+use App\Factories\ViewTasksMessage\DefaultViewMessage;
+use App\Models\Task;
+use App\Services\HashService;
+use Carbon\Carbon;
 
 class TomorrowCommand extends AbstractCommand
 {
@@ -15,20 +17,15 @@ class TomorrowCommand extends AbstractCommand
      * @return void
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \JsonException
+     * @throws \Psr\Container\ContainerExceptionInterface
+     * @throws \Psr\Container\NotFoundExceptionInterface
      */
     public function execute(Update $update): void
     {
-        $this->telegramService->sendMessage(
-            "📅 *Tomorrow's Tasks*\n\nGet ready for tomorrow by managing your tasks now\. Use the buttons below to add, complete, view, or delete tasks for tomorrow\. Plan ahead and stay organized\!",
-            $update->message->chat->id,
-            InlineKeyboardMarkupDTO::make([
-                InlineKeyboardButtonDTO::make('➕ Add Task', callback_data: 'add-task-for-tomorrow'),
-                InlineKeyboardButtonDTO::make('✅ Complete Task', callback_data: '1'),
-                [
-                    InlineKeyboardButtonDTO::make('🗑️ Delete Task', callback_data: '2'),
-                    InlineKeyboardButtonDTO::make('👀 View Tasks', callback_data: '3'),
-                ],
-            ])
-        );
+        $date = Carbon::tomorrow()->locale($update->message->from->languageCode);
+        $tasks = Task::byChatId($update->message->chat->id)->byDate($date)->get();
+        $viewMessage = new DefaultViewMessage($date, $this->translator, $this->container->get(HashService::class));
+
+        $this->viewTasksService->sendNewMessage($update->message->chat->id, $viewMessage->getText($tasks), $date);
     }
 }

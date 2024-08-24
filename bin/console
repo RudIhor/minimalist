@@ -5,15 +5,24 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use App\Commands\SendEveningReminders;
+use App\Commands\SendMorningReminders;
 use App\Commands\SetTelegramCommandsCommand;
 use App\Commands\SetWebhookCommand;
 use App\Commands\TestCommand;
+use Dotenv\Dotenv;
 use Symfony\Component\Console\Application;
+
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 
 $application = new Application();
 
 $application->add(new SetWebhookCommand());
 $application->add(new SetTelegramCommandsCommand());
 $application->add(new TestCommand());
+
+$application->add(new SendMorningReminders());
+$application->add(new SendEveningReminders());
 
 $application->run();

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Controllers\RemindersController;
 use App\Handlers\WebhookHandler;
 use Slim\App;
 use Slim\Psr7\Request;
@@ -15,6 +16,9 @@ return function (App $app) {
 
         return $response;
     });
+
+    $app->get('/reminders/send-morning', [RemindersController::class, 'sendRemindersInTheMorning']);
+    $app->get('/reminders/send-evening', [RemindersController::class, 'sendRemindersInTheEvening']);
 
     $app->get('/up', function (Request $request, Response $response) {
         $response->getBody()->write('Healthy!');

@@ -6,24 +6,27 @@ namespace App\TelegramCommands;
 
 use App\Core\TelegramService;
 use App\Entities\Update;
+use App\Services\ViewServices\ViewTasksService;
 use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
-use Slim\App;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class AbstractCommand
 {
     protected TelegramService $telegramService;
     protected TranslatorInterface $translator;
+    protected ViewTasksService $viewTasksService;
 
     /**
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function __construct(protected App $app)
+    public function __construct(protected ContainerInterface $container)
     {
-        $this->telegramService = $this->app->getContainer()->get(TelegramService::class);
-        $this->translator = $this->app->getContainer()->get(TranslatorInterface::class);
+        $this->telegramService = $this->container->get(TelegramService::class);
+        $this->translator = $this->container->get(TranslatorInterface::class);
+        $this->viewTasksService = new ViewTasksService($this->container);
     }
 
     abstract public function execute(Update $update);

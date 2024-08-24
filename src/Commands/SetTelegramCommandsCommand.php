@@ -19,9 +19,16 @@ class SetTelegramCommandsCommand extends AbstractCommand
     public function __construct()
     {
         parent::__construct();
-        $this->telegramService = new TelegramService();
+        $this->telegramService = new TelegramService($_ENV['TELEGRAM_BOT_TOKEN']);
     }
 
+    /**
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     * @return int
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JsonException
+     */
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->telegramService->setMyCommands(AvailableCommand::registeredCommands());

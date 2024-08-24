@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\TelegramCommands;
 
-use App\DataTransferObjects\ReplyMarkups\InlineKeyboardButtonDTO;
-use App\DataTransferObjects\ReplyMarkups\InlineKeyboardMarkupDTO;
+use App\DataTransferObjects\ReplyMarkups\ForceReplyDTO;
 use App\Entities\Update;
+use App\Models\TemporaryLog;
 
 class FutureCommand extends AbstractCommand
 {
@@ -18,17 +18,16 @@ class FutureCommand extends AbstractCommand
      */
     public function execute(Update $update): void
     {
-        $this->telegramService->sendMessage(
-            "📅 *Future Tasks*\n\nPlan your tasks for the days ahead\. Use the buttons below to add, complete, view, or delete tasks for any future date\. Keep track of your long term goals and deadlines\!",
+        $result = $this->telegramService->sendMessage(
+            $this->translator->trans('ask-future-date-for-tasks'),
             $update->message->chat->id,
-            InlineKeyboardMarkupDTO::make([
-                InlineKeyboardButtonDTO::make('➕ Add Task', callback_data: 'add-task-for-future'),
-                InlineKeyboardButtonDTO::make('✅ Complete Task', callback_data: '1'),
-                [
-                    InlineKeyboardButtonDTO::make('🗑️ Delete Task', callback_data: '2'),
-                    InlineKeyboardButtonDTO::make('👀 View Tasks', callback_data: '3'),
-                ],
-            ]),
+            ForceReplyDTO::make(true)
         );
+
+        TemporaryLog::updateOrCreate([
+            'chat_id' => $_SESSION['chat_id'],
+        ], [
+            'data' => ['message_id_of_bot_question' => $result['result']['message_id']],
+        ]);
     }
 }

@@ -18,7 +18,7 @@ class SetWebhookCommand extends AbstractCommand
     public function __construct()
     {
         parent::__construct();
-        $this->telegramService = new TelegramService();
+        $this->telegramService = new TelegramService($_ENV['TELEGRAM_BOT_TOKEN']);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

@@ -1,6 +1,6 @@
 .env
-.docker/db/data
+.docker-local/db/data
 vendor
 .idea
 logs
-var/nginx
+var
