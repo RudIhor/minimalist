@@ -14,6 +14,8 @@ use Psr\Log\LoggerInterface;
 use Slim\Factory\AppFactory;
 use Slim\Factory\ServerRequestCreatorFactory;
 
+use function Sentry\init;
+
 require __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../app/constants.php';
 
@@ -21,6 +23,12 @@ session_start();
 
 $dotenv = Dotenv::createImmutable(BASE_PATH);
 $dotenv->load();
+
+init([
+    'dsn' => $_ENV['SENTRY_DSN'],
+    'traces_sample_rate' => 1.0,
+    'profiles_sample_rate' => 1.0,
+]);
 
 // Instantiate PHP-DI ContainerBuilder
 $containerBuilder = new ContainerBuilder();
