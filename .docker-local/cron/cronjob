@@ -1,2 +1,2 @@
-0 7 * * * /usr/local/bin/php /var/www/html/bin/console reminders:morning
-0 20 * * * /usr/local/bin/php /var/www/html/bin/console reminders:evening
+0 7 * * * /usr/bin/php /var/www/html/bin/console reminders:morning >> /var/log/cron.log 2&>1
+0 20 * * * /usr/bin/php /var/www/html/bin/console reminders:evening >> /var/log/cron.log 2&>1
