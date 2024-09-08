@@ -10,9 +10,9 @@ $startCommandText = <<<END
 Your simple and slim task manager, right here on Telegram. Manage your tasks effortlessly and stay organized with Minimalist.
 
 To get started, use the commands below:
-**/today**: Manage today's tasks 📅
-**/tomorrow**: Plan for tomorrow 🗓️
-**/future**: Organize tasks for future dates 📆
+/today: Manage today's tasks 📅
+/tomorrow: Plan for tomorrow 🗓️
+/future: Organize tasks for future dates 📆
 
 🔔 We recommend starting with the /today command to see what's on your agenda for today.
 
@@ -22,6 +22,10 @@ Here's what you can do:
 ✅: Mark tasks as completed and track your progress.
 
 For help with commands, type /help.
+
+We prioritize your *privacy* 🔒. That’s why all your task names are securely encrypted using AES (Advanced Encryption Standard).
+
+In simple terms, AES is one of the most advanced encryption methods, making it virtually impossible for anyone to hack and access your task details.
 
 Let's keep things simple and productive! 🌟
 
@@ -67,8 +71,18 @@ return [
             'header' => "📅 *%s*\n\n",
             'body-no-tasks' => '📝 There are no tasks yet. Start adding some to stay organized!',
         ],
-        'specify-task-number' => '🔢 Please specify the task number you want to %s.',
-        'no-tasks' => '📅 No tasks scheduled for this date.',
+        'specify-tasks-to' => [
+            'complete' => 'Please specify the task name you want to complete.',
+            'move' => 'Please specify the task name you want to move to tomorrow.',
+            'copy' => 'Please specify the task name you want to copy to tomorrow.',
+            'delete' => 'Please specify the task name you want to delete.',
+        ],
+        'no-tasks-to' => [
+            'complete' => '📅 There are no scheduled tasks to complete.',
+            'move' => '📅 There are no scheduled tasks to move to tomorrow.',
+            'copy' => '📅 There are no scheduled tasks to copy to tomorrow',
+            'delete' => '📅 There are no scheduled tasks to delete.',
+        ],
     ],
     'validation' => [
         'errors' => [
@@ -78,7 +92,9 @@ return [
                     'characters' => "||(QID: 6)||\n 🚫 Error: The task title cannot contain special characters like underscores (_) or asterisks (*)."
                 ],
                 'date-format' => "||(QID: 4)||\n 🚫 Error: Invalid date format. Please use the format DD MM (e.g., 12 01 for January 12th).",
-                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Error: The date is either invalid or in the past. Please enter a valid future date within the year ." . date('Y'),
+                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Error: The date is either invalid or in the past. Please enter a valid future date within the year ." . date(
+                        'Y'
+                    ),
             ],
         ],
         'business' => [

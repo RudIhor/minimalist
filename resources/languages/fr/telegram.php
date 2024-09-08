@@ -23,6 +23,10 @@ Voici ce que vous pouvez faire :
 
 Pour obtenir de l'aide avec les commandes, tapez /help.
 
+Nous priorisons votre *confidentialité* 🔒. C'est pourquoi tous les noms de vos tâches sont sécurisés par chiffrement avec AES (Advanced Encryption Standard).
+
+En termes simples, AES est l'une des méthodes de cryptage les plus avancées, rendant pratiquement impossible pour quiconque de pirater et d'accéder aux détails de vos tâches.
+
 Gardons les choses simples et productives! 🌟
 
 Fait avec ❤️ en 🇺🇦
@@ -67,8 +71,18 @@ return [
             'header' => "📅 *%s*\n\n",
             'body-no-tasks' => '📝 Il n\'y a pas encore de tâches. Commencez à en ajouter pour rester organisé!',
         ],
-        'specify-task-number' => '🔢 Veuillez spécifier le numéro de la tâche que vous souhaitez %s.',
-        'no-tasks' => '📅 Aucune tâche prévue pour cette date.',
+        'specify-tasks-to' => [
+            'complete' => 'Veuillez spécifier le nom de la tâche que vous souhaitez terminer.',
+            'move' => 'Veuillez spécifier le nom de la tâche que vous souhaitez déplacer à demain.',
+            'copy' => 'Veuillez spécifier le nom de la tâche que vous souhaitez copier pour demain.',
+            'delete' => 'Veuillez spécifier le nom de la tâche que vous souhaitez supprimer.',
+        ],
+        'no-tasks-to' => [
+            'complete' => '📅 Il n\'y a pas de tâches planifiées à terminer.',
+            'move' => '📅 Il n\'y a pas de tâches planifiées à déplacer à demain.',
+            'copy' => '📅 Il n\'y a pas de tâches planifiées à copier pour demain.',
+            'delete' => '📅 Il n\'y a pas de tâches planifiées à supprimer.',
+        ],
     ],
     'validation' => [
         'errors' => [

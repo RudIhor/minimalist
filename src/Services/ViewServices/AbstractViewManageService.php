@@ -47,13 +47,12 @@ abstract class AbstractViewManageService extends AbstractService
                 $chatId,
                 $viewMessage->getText(collect()),
                 $date,
-                $this->translator->trans('commands.no-tasks')
+                $this->translator->trans('commands.no-tasks-to.' . $this->getAction()->value)
             );
-
             return;
         }
         $this->telegramService->editSentMessageText(
-            sprintf($this->translator->trans('commands.specify-task-number'), $this->getAction()->value),
+            $this->translator->trans('commands.specify-task-to.' . $this->getAction()->value,),
             $chatId,
             $_SESSION['message_id'],
             InlineKeyboardMarkupDTO::make($inlineKeyboard)
