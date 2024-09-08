@@ -11,10 +11,6 @@ enum TaskLimit: int
 
     public static function getLimit(bool $isPremium): int
     {
-        if ($isPremium) {
-            return self::PremiumUser->value;
-        }
-
-        return self::DefaultUser->value;
+        return self::PremiumUser->value;
     }
 }
