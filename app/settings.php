@@ -12,8 +12,8 @@ return function (ContainerBuilder $containerBuilder) {
         SettingsInterface::class => function () {
             return new Settings([
                 'displayErrorDetails' => (bool)$_ENV['APP_DEBUG'],
-                'logError'            => true,
-                'logErrorDetails'     => true,
+                'logError' => true,
+                'logErrorDetails' => true,
                 'logger' => [
                     'name' => 'app',
                     'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../var/logs/app.log',
@@ -25,6 +25,7 @@ return function (ContainerBuilder $containerBuilder) {
                     'database' => $_ENV['DB_DATABASE'],
                     'username' => $_ENV['DB_USERNAME'],
                     'password' => $_ENV['DB_PASSWORD'],
+                    'port' => $_ENV['DB_PORT'],
                     'charset' => 'utf8mb4',
                     'collation' => 'utf8mb4_unicode_ci',
                     'prefix' => '',
