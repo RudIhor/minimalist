@@ -71,7 +71,7 @@ return [
             'header' => "📅 *%s*\n\n",
             'body-no-tasks' => '📝 There are no tasks yet. Start adding some to stay organized!',
         ],
-        'specify-tasks-to' => [
+        'specify-task-to' => [
             'complete' => 'Please specify the task name you want to complete.',
             'move' => 'Please specify the task name you want to move to tomorrow.',
             'copy' => 'Please specify the task name you want to copy to tomorrow.',
