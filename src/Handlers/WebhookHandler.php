@@ -33,9 +33,11 @@ readonly class WebhookHandler
     {
         $this->update = Update::from($data);
         if (!empty($this->update->message) && str_starts_with($this->update->message->text, '/')) {
-            (new CreateLogAction())->execute(
-                ['data' => $this->update->message->text, 'chat_id' => $this->update->message->chat->id]
-            );
+            if (!empty(User::byChatId($this->update->message->chat->id))) {
+                (new CreateLogAction())->execute(
+                    ['data' => $this->update->message->text, 'chat_id' => $this->update->message->chat->id]
+                );
+            }
         }
         $this->telegramService = $app->getContainer()->get(TelegramService::class);
         $_SESSION['chat_id'] = $this->update->message?->chat->id ?? $this->update->callbackQuery?->message->chat->id;
