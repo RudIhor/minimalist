@@ -33,7 +33,7 @@ readonly class WebhookHandler
     {
         $this->update = Update::from($data);
         if (!empty($this->update->message) && str_starts_with($this->update->message->text, '/')) {
-            if (!empty(User::byChatId($this->update->message->chat->id))) {
+            if (!empty(User::byChatId($this->update->message->chat->id)->first())) {
                 (new CreateLogAction())->execute(
                     ['data' => $this->update->message->text, 'chat_id' => $this->update->message->chat->id]
                 );
