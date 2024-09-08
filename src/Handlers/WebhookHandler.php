@@ -76,7 +76,11 @@ readonly class WebhookHandler
      */
     private function handleCallback(int $messageId): bool
     {
-        [$timestamp, $action, $id] = explode('/', $this->update->callbackQuery->data);
+        if (count($parts = explode('/', $this->update->callbackQuery->data)) === 3) {
+            [$timestamp, $action, $id] = $parts;
+        } else {
+            [$timestamp, $action] = $parts;
+        }
         $date = Carbon::createFromTimestampUTC($timestamp);
         if ($action === 'back') {
             $temporaryLog = TemporaryLog::byChatId($this->update->callbackQuery?->message->chat->id)->first();
