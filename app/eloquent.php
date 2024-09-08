@@ -15,6 +15,7 @@ return function (App $app, Settings $settings) {
         'database' => $databaseConfig['database'],
         'username' => $databaseConfig['username'],
         'password' => $databaseConfig['password'],
+        'port' => $databaseConfig['port'],
         'charset' => $databaseConfig['charset'],
         'collation' => $databaseConfig['collation'],
         'prefix' => $databaseConfig['prefix'],
