@@ -23,6 +23,10 @@ Das können Sie tun:
 
 Für Hilfe bei den Befehlen geben Sie /help ein.
 
+Wir legen großen Wert auf Ihre *Privatsphäre* 🔒. Deshalb werden alle Ihre Aufgabennamen sicher mit AES (Advanced Encryption Standard) verschlüsselt.
+
+Einfach ausgedrückt ist AES eine der fortschrittlichsten Verschlüsselungsmethoden, wodurch es nahezu unmöglich wird, Ihre Aufgabendetails zu hacken und zu lesen.
+
 Lassen Sie uns die Dinge einfach und produktiv halten! 🌟
 
 Hergestellt mit ❤️ in 🇺🇦
@@ -67,8 +71,18 @@ return [
             'header' => "📅 *%s*\n\n",
             'body-no-tasks' => '📝 Es gibt noch keine Aufgaben. Fangen Sie an, einige hinzuzufügen, um organisiert zu bleiben!',
         ],
-        'specify-task-number' => '🔢 Bitte geben Sie die Nummer der Aufgabe an, die Sie %s möchten.',
-        'no-tasks' => '📅 Für dieses Datum sind keine Aufgaben geplant.',
+        'specify-tasks-to' => [
+            'complete' => 'Bitte geben Sie den Namen der Aufgabe an, die Sie abschließen möchten.',
+            'move' => 'Bitte geben Sie den Namen der Aufgabe an, die Sie auf morgen verschieben möchten.',
+            'copy' => 'Bitte geben Sie den Namen der Aufgabe an, die Sie auf morgen kopieren möchten.',
+            'delete' => 'Bitte geben Sie den Namen der Aufgabe an, die Sie löschen möchten.',
+        ],
+        'no-tasks-to' => [
+            'complete' => '📅 Es gibt keine geplanten Aufgaben zum Abschließen.',
+            'move' => '📅 Es gibt keine geplanten Aufgaben, die auf morgen verschoben werden können.',
+            'copy' => '📅 Es gibt keine geplanten Aufgaben zum Kopieren auf morgen.',
+            'delete' => '📅 Es gibt keine geplanten Aufgaben zum Löschen.',
+        ],
     ],
     'validation' => [
         'errors' => [

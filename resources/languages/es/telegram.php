@@ -23,6 +23,10 @@ Esto es lo que puedes hacer:
 
 Para obtener ayuda con los comandos, escribe /help.
 
+Priorizamos tu *privacidad* 🔒. Por eso, todos los nombres de tus tareas están cifrados de manera segura utilizando AES (Advanced Encryption Standard).
+
+En términos simples, AES es uno de los métodos de cifrado más avanzados, lo que hace que sea prácticamente imposible que alguien piratee y acceda a los detalles de tus tareas.
+
 ¡Mantengamos las cosas simples y productivas! 🌟
 
 Hecho con ❤️ en 🇺🇦
@@ -67,8 +71,18 @@ return [
             'header' => "📅 *%s*\n\n",
             'body-no-tasks' => '📝 Todavía no hay tareas. ¡Comienza a agregar algunas para mantenerte organizado!',
         ],
-        'specify-task-number' => '🔢 Por favor, especifica el número de la tarea que deseas %s.',
-        'no-tasks' => '📅 No hay tareas programadas para esta fecha.',
+        'specify-tasks-to' => [
+            'complete' => 'Por favor, especifique el nombre de la tarea que desea completar.',
+            'move' => 'Por favor, especifique el nombre de la tarea que desea mover a mañana.',
+            'copy' => 'Por favor, especifique el nombre de la tarea que desea copiar para mañana.',
+            'delete' => 'Por favor, especifique el nombre de la tarea que desea eliminar.',
+        ],
+        'no-tasks-to' => [
+            'complete' => '📅 No hay tareas programadas para completar.',
+            'move' => '📅 No hay tareas programadas para mover a mañana.',
+            'copy' => '📅 No hay tareas programadas para copiar para mañana.',
+            'delete' => '📅 No hay tareas programadas para eliminar.',
+        ],
     ],
     'validation' => [
         'errors' => [

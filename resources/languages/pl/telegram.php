@@ -23,6 +23,10 @@ Oto, co możesz zrobić:
 
 Aby uzyskać pomoc dotyczącą poleceń, wpisz /help.
 
+Priorytetem jest dla nas Twoja *prywatność* 🔒. Dlatego nazwy wszystkich zadań są bezpiecznie szyfrowane za pomocą AES (Advanced Encryption Standard).
+
+Mówiąc prościej, AES to jedna z najbardziej zaawansowanych metod szyfrowania, co sprawia, że praktycznie niemożliwe jest zhakowanie i dostęp do szczegółów Twoich zadań.
+
 Trzymajmy wszystko prosto i produktywnie! 🌟
 
 Zrobione z ❤️ w 🇺🇦
@@ -67,8 +71,18 @@ return [
             'header' => "📅 *%s*\n\n",
             'body-no-tasks' => '📝 Nie ma jeszcze zadań. Zacznij dodawać, aby być zorganizowanym!',
         ],
-        'specify-task-number' => '🔢 Proszę podaj numer zadania, które chcesz %s.',
-        'no-tasks' => '📅 Brak zadań zaplanowanych na ten dzień.',
+        'specify-tasks-to' => [
+            'complete' => 'Proszę podać nazwę zadania, które chcesz ukończyć.',
+            'move' => 'Proszę podać nazwę zadania, które chcesz przenieść na jutro.',
+            'copy' => 'Proszę podać nazwę zadania, które chcesz skopiować na jutro.',
+            'delete' => 'Proszę podać nazwę zadania, które chcesz usunąć.',
+        ],
+        'no-tasks-to' => [
+            'complete' => '📅 Brak zaplanowanych zadań do ukończenia.',
+            'move' => '📅 Brak zaplanowanych zadań do przeniesienia na jutro.',
+            'copy' => '📅 Brak zaplanowanych zadań do skopiowania na jutro.',
+            'delete' => '📅 Brak zaplanowanych zadań do usunięcia.',
+        ],
     ],
     'validation' => [
         'errors' => [
