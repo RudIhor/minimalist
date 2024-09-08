@@ -31,6 +31,9 @@ readonly class WebhookHandler
      */
     public function __construct(public App $app, array $data)
     {
+        $f = fopen(BASE_PATH . '/var/logs/app.log', 'a');
+        fwrite($f, json_encode($data));
+        fclose($f);
         $this->update = Update::from($data);
         if (!empty($this->update->message) && str_starts_with($this->update->message->text, '/')) {
             if (!empty(User::byChatId($this->update->message->chat->id)->first())) {
