@@ -23,7 +23,7 @@ class ViewTaskValidator extends AbstractValidator
      */
     public function futureDate(string $date): void
     {
-        preg_match_all('/(?<day>\d{2}) (?<month>\d{2})/', $date, $matches);
+        preg_match_all('/(?<day>\d{2}).(?<month>\d{2})/', $date, $matches);
         $filteredMatches = array_filter($matches);
         if (empty($filteredMatches)) {
             $this->throwValidationErrorMessage('date-format');

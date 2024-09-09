@@ -21,7 +21,8 @@ abstract class AbstractViewMessageFactory
     public function __construct(
         protected Carbon $date,
         protected TranslatorInterface $translator,
-        protected HashService $hashService
+        protected HashService $hashService,
+        protected string $locale = 'en'
     ) {
     }
 
@@ -40,7 +41,7 @@ abstract class AbstractViewMessageFactory
     protected function header(): string
     {
         return sprintf(
-            $this->translator->trans('commands.view.header', locale: $this->date->getLocale()),
+            $this->translator->trans('commands.view.header', locale: $this->locale),
             $this->date->translatedFormat(self::DATE_FORMAT),
         );
     }
@@ -87,6 +88,6 @@ abstract class AbstractViewMessageFactory
     {
         $growthMindsetService = new GrowthMindsetService($_ENV['GROWTH_MINDSET_TOKEN']);
 
-        return sprintf("\n\n_%s_", $growthMindsetService->getRandomQuoteWithTranslation($this->date->getLocale()));
+        return sprintf("\n\n_%s_", $growthMindsetService->getRandomQuoteWithTranslation($this->locale));
     }
 }

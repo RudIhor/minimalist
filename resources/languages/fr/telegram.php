@@ -91,7 +91,7 @@ return [
                     'length' => "||(QID: 2)||\n 🚫 Erreur : Le titre de la tâche doit comporter entre 3 et 100 caractères.",
                     'characters' => "||(QID: 6)||\n 🚫 Erreur : Le titre de la tâche ne peut pas contenir de caractères spéciaux tels que des soulignements (_) ou des astérisques (*)."
                 ],
-                'date-format' => "||(QID: 4)||\n 🚫 Erreur : Format de date invalide. Veuillez utiliser le format JJ MM (par exemple, 12 01 pour le 12 janvier).",
+                'date-format' => "||(QID: 4)||\n 🚫 Erreur : Format de date invalide. Veuillez utiliser le format JJ.MM (par exemple, 12.01 pour le 12 janvier).",
                 'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Erreur : La date est soit invalide, soit passée. Veuillez entrer une date future valide dans l'année ." . date('Y'),
             ],
         ],
