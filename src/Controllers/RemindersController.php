@@ -47,7 +47,8 @@ class RemindersController extends Controller
             $viewMessage = new MorningViewMessage(
                 $date,
                 $this->container->get(TranslatorInterface::class),
-                $this->container->get(HashService::class)
+                $this->container->get(HashService::class),
+                $user->language_code
             );
 
             $this->viewTasksService->sendNewMessage($user->chat_id, $viewMessage->getText($tasks), $date);
@@ -73,7 +74,8 @@ class RemindersController extends Controller
             $viewMessage = new EveningViewMessage(
                 $date,
                 $this->container->get(TranslatorInterface::class),
-                $this->container->get(HashService::class)
+                $this->container->get(HashService::class),
+                $user->language_code
             );
 
             $this->viewTasksService->sendNewMessage($user->chat_id, $viewMessage->getText($tasks), $date);

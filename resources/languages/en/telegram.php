@@ -91,7 +91,7 @@ return [
                     'length' => "||(QID: 2)||\n 🚫 Error: The task title must be between 3 and 100 characters.",
                     'characters' => "||(QID: 6)||\n 🚫 Error: The task title cannot contain special characters like underscores (_) or asterisks (*)."
                 ],
-                'date-format' => "||(QID: 4)||\n 🚫 Error: Invalid date format. Please use the format DD MM (e.g., 12 01 for January 12th).",
+                'date-format' => "||(QID: 4)||\n 🚫 Error: Invalid date format. Please use the format DD.MM (e.g., 12.01 for January 12th).",
                 'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Error: The date is either invalid or in the past. Please enter a valid future date within the year ." . date(
                         'Y'
                     ),

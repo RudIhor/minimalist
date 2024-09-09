@@ -10,6 +10,6 @@ class EveningViewMessage extends AbstractViewMessageFactory
 {
     public function getText(Collection $tasks): string
     {
-        return $this->translator->trans('reminders.evening', locale: $this->date->getLocale());
+        return $this->translator->trans('reminders.evening', locale: $this->locale);
     }
 }

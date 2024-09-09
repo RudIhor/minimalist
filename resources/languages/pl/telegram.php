@@ -91,7 +91,7 @@ return [
                     'length' => "||(QID: 2)||\n 🚫 Błąd: Tytuł zadania musi mieć od 3 do 100 znaków.",
                     'characters' => "||(QID: 6)||\n 🚫 Błąd: Tytuł zadania nie może zawierać znaków specjalnych, takich jak podkreślenia (_) czy gwiazdki (*)."
                 ],
-                'date-format' => "||(QID: 4)||\n 🚫 Błąd: Nieprawidłowy format daty. Proszę użyj formatu DD MM (np. 12 01 dla 12 stycznia).",
+                'date-format' => "||(QID: 4)||\n 🚫 Błąd: Nieprawidłowy format daty. Proszę użyj formatu DD.MM (np. 12.01 dla 12 stycznia).",
                 'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Błąd: Data jest nieprawidłowa lub jest z przeszłości. Proszę podaj prawidłową przyszłą datę w roku ." . date('Y'),
             ],
         ],
