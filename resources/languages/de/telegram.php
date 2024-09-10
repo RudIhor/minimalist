@@ -71,7 +71,7 @@ return [
             'header' => "📅 *%s*\n\n",
             'body-no-tasks' => '📝 Es gibt noch keine Aufgaben. Fangen Sie an, einige hinzuzufügen, um organisiert zu bleiben!',
         ],
-        'specify-tasks-to' => [
+        'specify-task-to' => [
             'complete' => 'Bitte geben Sie den Namen der Aufgabe an, die Sie abschließen möchten.',
             'move' => 'Bitte geben Sie den Namen der Aufgabe an, die Sie auf morgen verschieben möchten.',
             'copy' => 'Bitte geben Sie den Namen der Aufgabe an, die Sie auf morgen kopieren möchten.',

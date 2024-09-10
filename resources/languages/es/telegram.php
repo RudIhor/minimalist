@@ -71,7 +71,7 @@ return [
             'header' => "📅 *%s*\n\n",
             'body-no-tasks' => '📝 Todavía no hay tareas. ¡Comienza a agregar algunas para mantenerte organizado!',
         ],
-        'specify-tasks-to' => [
+        'specify-task-to' => [
             'complete' => 'Por favor, especifique el nombre de la tarea que desea completar.',
             'move' => 'Por favor, especifique el nombre de la tarea que desea mover a mañana.',
             'copy' => 'Por favor, especifique el nombre de la tarea que desea copiar para mañana.',
