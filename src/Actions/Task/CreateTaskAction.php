@@ -22,8 +22,14 @@ class CreateTaskAction
      */
     public function handle(array $data): Task
     {
+        if (!empty($data['emoji'])) {
+            $title = $data['title'] . ' ' . $data['emoji'];
+        } else {
+            $title = $data['title'];
+        }
+
         return Task::query()->create([
-            'title' => $this->hashService->encrypt($data['title'] . ' ' . $data['emoji']),
+            'title' => $this->hashService->encrypt($title),
             'date' => $data['date'],
             'chat_id' => $data['chat_id'],
         ]);

@@ -56,6 +56,13 @@ class ViewTasksService extends AbstractService
         Carbon $date,
         ?string $updateText = null,
     ): void {
+        TemporaryLog::updateOrCreate([
+            'chat_id' => $chatId,
+        ], [
+            'date' => $date,
+            'data' => ['message_id' => $messageId, 'previous_message_text' => $updateText ?? $text],
+        ]);
+
         $this->telegramService->editSentMessageText(
             $updateText ?? $text,
             $chatId,

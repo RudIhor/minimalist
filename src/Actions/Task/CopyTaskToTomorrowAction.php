@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Actions\Task;
 
+use App\Enums\Emoji;
 use App\Models\Task;
 use App\Services\HashService;
 use Carbon\Carbon;

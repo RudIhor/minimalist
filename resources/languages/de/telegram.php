@@ -92,7 +92,7 @@ return [
                     'characters' => "||(QID: 6)||\n 🚫 Fehler: Der Titel der Aufgabe darf keine Sonderzeichen wie Unterstriche (_) oder Sternchen (*) enthalten."
                 ],
                 'date-format' => "||(QID: 4)||\n 🚫 Fehler: Ungültiges Datumsformat. Bitte verwenden Sie das Format TT.MM (z. B. 12.01 für den 12. Januar).",
-                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Fehler: Das Datum ist entweder ungültig oder liegt in der Vergangenheit. Bitte geben Sie ein gültiges zukünftiges Datum innerhalb des Jahres ein." . date('Y'),
+                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Fehler: Das Datum ist entweder ungültig oder liegt in der Vergangenheit. Bitte geben Sie ein gültiges zukünftiges Datum innerhalb des Jahres ein. " . date('Y'),
             ],
         ],
         'business' => [
