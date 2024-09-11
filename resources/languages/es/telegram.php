@@ -92,7 +92,7 @@ return [
                     'characters' => "||(QID: 6)||\n 🚫 Error: El título de la tarea no puede contener caracteres especiales como guiones bajos (_) o asteriscos (*)."
                 ],
                 'date-format' => "||(QID: 4)||\n 🚫 Error: Formato de fecha inválido. Por favor, utiliza el formato DD.MM (por ejemplo, 12.01 para el 12 de enero).",
-                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Error: La fecha es inválida o está en el pasado. Por favor, introduce una fecha futura válida dentro del año ." . date('Y'),
+                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Error: La fecha es inválida o está en el pasado. Por favor, introduce una fecha futura válida dentro del año. " . date('Y'),
             ],
         ],
         'business' => [
