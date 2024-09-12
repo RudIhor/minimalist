@@ -16,6 +16,6 @@ readonly class From
 
     public static function from(array $data): From
     {
-        return new self($data['id'], $data['is_bot'], $data['first_name'], $data['username']);
+        return new self($data['id'], $data['is_bot'], $data['first_name'], $data['username'] ?? null);
     }
 }
