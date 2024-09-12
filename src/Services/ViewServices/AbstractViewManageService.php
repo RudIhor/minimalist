@@ -37,15 +37,7 @@ abstract class AbstractViewManageService extends AbstractService
 
         $tasks = $this->getUserTasks($date, $chatId);
         $inlineKeyboard = $this->getInlineKeyboardForTasks($tasks, $date);
-
-        if (count($inlineKeyboard) === 1) {
-            $temp = $inlineKeyboard[0];
-            $inlineKeyboard[0] = [ButtonHelper::getBackButton($date->unix())];
-        } else {
-            $temp = $inlineKeyboard[1];
-            $inlineKeyboard[1] = [ButtonHelper::getBackButton($date->unix())];
-        }
-        $inlineKeyboard[] = $temp;
+        $inlineKeyboard[] = ButtonHelper::getBackButton($date->unix());
 
         $viewMessage = new NoTaskFoundViewMessage($date, $this->translator, $this->hashService);
 
