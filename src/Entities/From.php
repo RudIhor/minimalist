@@ -10,7 +10,7 @@ readonly class From
         public int $id,
         public bool $isBot,
         public string $firstName,
-        public string $username
+        public ?string $username
     ) {
     }
 
