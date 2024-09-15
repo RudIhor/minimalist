@@ -39,13 +39,12 @@ readonly class WebhookHandler
     {
         $this->telegramService = $app->getContainer()->get(TelegramService::class);
         $this->translator = $app->getContainer()->get(TranslatorInterface::class);
-        $message = $data['message'];
         try {
             $this->update = Update::from($data);
         } catch (TelegramException $e) {
             $this->telegramService->sendMessage(
-                $this->translator->trans($e->getMessage(), locale: $message['from']['language_code']),
-                $message['chat']['id']
+                $this->translator->trans($e->getMessage(), locale: $data['message']['from']['language_code']),
+                $data['message']['chat']['id']
             );
         }
         if (!empty($this->update->message) && str_starts_with($this->update->message->text, '/')) {
