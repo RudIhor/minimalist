@@ -10,18 +10,24 @@ use App\Core\TelegramService;
 use App\Entities\Update;
 use App\Enums\ActionStrategy;
 use App\Enums\AvailableCommand;
+use App\Exceptions\TelegramException;
 use App\Models\TemporaryLog;
 use App\Models\User;
 use App\Services\ValidationMapper;
 use App\TelegramCommands\AbstractCommand;
 use App\TelegramCommands\NotFoundCommand;
 use Carbon\Carbon;
+use GuzzleHttp\Exception\GuzzleException;
 use Slim\App;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 readonly class WebhookHandler
 {
     public Update $update;
+
     protected TelegramService $telegramService;
+
+    private TranslatorInterface $translator;
 
     /**
      * @param App $app
@@ -31,10 +37,17 @@ readonly class WebhookHandler
      */
     public function __construct(public App $app, array $data)
     {
-        $f = fopen(BASE_PATH . '/var/logs/app.log', 'a');
-        fwrite($f, json_encode($data));
-        fclose($f);
-        $this->update = Update::from($data);
+        $this->telegramService = $app->getContainer()->get(TelegramService::class);
+        $this->translator = $app->getContainer()->get(TranslatorInterface::class);
+        $message = $data['message'];
+        try {
+            $this->update = Update::from($data);
+        } catch (TelegramException $e) {
+            $this->telegramService->sendMessage(
+                $this->translator->trans($e->getMessage(), locale: $message['from']['language_code']),
+                $message['chat']['id']
+            );
+        }
         if (!empty($this->update->message) && str_starts_with($this->update->message->text, '/')) {
             if (!empty(User::byChatId($this->update->message->chat->id)->first())) {
                 (new CreateLogAction())->execute(
@@ -42,7 +55,6 @@ readonly class WebhookHandler
                 );
             }
         }
-        $this->telegramService = $app->getContainer()->get(TelegramService::class);
         $_SESSION['chat_id'] = $this->update->message?->chat->id ?? $this->update->callbackQuery?->message->chat->id;
         $_SESSION['locale'] = $this->update->message?->from->languageCode ?? User::byChatId(
             $_SESSION['chat_id']

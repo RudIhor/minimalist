@@ -104,5 +104,8 @@ return [
     ],
     'reminders' => [
         'evening' => $eveningReminderText,
-    ]
+    ],
+    'exceptions' => [
+        'text' => 'No hay texto en tu solicitud, probablemente enviaste algo que no tiene texto.'
+    ],
 ];

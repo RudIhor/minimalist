@@ -106,5 +106,8 @@ return [
     ],
     'reminders' => [
         'evening' => $eveningReminderText,
-    ]
+    ],
+    'exceptions' => [
+        'text' => 'There is no text in your request, probably you sent something that doesn\'t have text.'
+    ],
 ];

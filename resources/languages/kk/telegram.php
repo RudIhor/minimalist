@@ -104,5 +104,8 @@ return [
     ],
     'reminders' => [
         'evening' => $eveningReminderText,
-    ]
+    ],
+    'exceptions' => [
+        'text' => 'Сұрауыңызда мәтін жоқ, мәтіні жоқ нәрсені жіберген болуыңыз мүмкін.',
+    ],
 ];

@@ -10,6 +10,11 @@ readonly class Update
     {
     }
 
+    /**
+     * @param array $data
+     * @return Update
+     * @throws \App\Exceptions\TelegramException
+     */
     public static function from(array $data): Update
     {
         return new self(

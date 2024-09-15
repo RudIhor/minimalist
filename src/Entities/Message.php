@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entities;
 
+use App\Exceptions\TelegramException;
+
 readonly class Message
 {
     protected function __construct(
@@ -16,10 +18,18 @@ readonly class Message
     ) {
     }
 
+    /**
+     * @param array|null $data
+     * @return Message|null
+     * @throws TelegramException
+     */
     public static function from(?array $data): ?Message
     {
         if (empty($data)) {
             return null;
+        }
+        if (empty($data['text'])) {
+            throw new TelegramException('exceptions.text');
         }
 
         return new self(
