@@ -54,7 +54,7 @@ abstract class AbstractViewMessageFactory
     {
         $body = '';
         if ($tasks->count() === 0) {
-            return $this->translator->trans('commands.view.body-no-tasks');
+            return $this->translator->trans('commands.view.body-no-tasks', locale: $this->date->locale);
         }
         foreach ($tasks as $task) {
             $body .= $this->generateTaskLine($task);

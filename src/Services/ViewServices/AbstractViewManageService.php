@@ -47,7 +47,10 @@ abstract class AbstractViewManageService extends AbstractService
                 $chatId,
                 $viewMessage->getText(collect()),
                 $date,
-                $this->translator->trans('commands.no-tasks-to.' . $this->getAction()->value)
+                $this->translator->trans(
+                    'commands.no-tasks-to.' . $this->getAction()->value,
+                    locale: $_SESSION['locale']
+                )
             );
             return;
         }

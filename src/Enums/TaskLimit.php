@@ -7,7 +7,7 @@ namespace App\Enums;
 enum TaskLimit: int
 {
     case DefaultUser = 5;
-    case PremiumUser = 100;
+    case PremiumUser = 20;
 
     public static function getLimit(bool $isPremium): int
     {
