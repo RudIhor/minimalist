@@ -190,7 +190,7 @@ class TelegramService
      */
     private function escapeTelegramCharacters(string $text): array|string
     {
-        foreach (['.', '!', ':', '-', '(', ')', '#'] as $character) {
+        foreach (['.', '!', ':', '-', '(', ')', '#', '`'] as $character) {
             $text = str_replace($character, sprintf("\%s", $character), $text);
         }
 
