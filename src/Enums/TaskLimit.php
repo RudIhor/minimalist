@@ -9,7 +9,7 @@ enum TaskLimit: int
     case DefaultUser = 5;
     case PremiumUser = 20;
 
-    public static function getLimit(bool $isPremium): int
+    public static function getLimit(): int
     {
         return self::PremiumUser->value;
     }

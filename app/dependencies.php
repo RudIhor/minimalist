@@ -41,7 +41,7 @@ return function (ContainerBuilder $containerBuilder) {
             return new HashService();
         },
         TranslatorInterface::class => function () {
-            $translator = new Translator($_SESSION['locale'] ?? '');
+            $translator = new Translator($_SESSION['locale'] ?? 'en');
             $translator->addLoader('array', new PhpFileLoader());
             $translator->addResource('array', dirname(__DIR__) . '/resources/languages/en/telegram.php', 'en');
             $translator->addResource('array', dirname(__DIR__) . '/resources/languages/en/questions.php', 'en');

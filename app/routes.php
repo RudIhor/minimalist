@@ -17,8 +17,9 @@ return function (App $app) {
         return $response;
     });
 
-    $app->get('/reminders/send-morning', [RemindersController::class, 'sendRemindersInTheMorning']);
-    $app->get('/reminders/send-evening', [RemindersController::class, 'sendRemindersInTheEvening']);
+    $app->get('/reminders/send-morning', [RemindersController::class, 'sendMorningReminders']);
+    $app->get('/reminders/send-afternoon', [RemindersController::class, 'sendAfternoonReminders']);
+    $app->get('/reminders/send-evening', [RemindersController::class, 'sendEveningReminders']);
 
     $app->get('/up', function (Request $request, Response $response) {
         $response->getBody()->write('Healthy!');

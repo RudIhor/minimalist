@@ -17,7 +17,6 @@ use App\Services\ValidationMapper;
 use App\TelegramCommands\AbstractCommand;
 use App\TelegramCommands\NotFoundCommand;
 use Carbon\Carbon;
-use GuzzleHttp\Exception\GuzzleException;
 use Slim\App;
 use Symfony\Contracts\Translation\TranslatorInterface;
 

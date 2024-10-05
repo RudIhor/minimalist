@@ -13,6 +13,7 @@ use App\Services\AbstractService;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Psr\Container\ContainerInterface;
+use Random\RandomException;
 
 abstract class AbstractViewManageService extends AbstractService
 {
@@ -30,6 +31,7 @@ abstract class AbstractViewManageService extends AbstractService
      * @return void
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \JsonException
+     * @throws RandomException
      */
     public function run(Carbon $date, int $chatId): void
     {
@@ -42,20 +44,20 @@ abstract class AbstractViewManageService extends AbstractService
         $viewMessage = new NoTaskFoundViewMessage($date, $this->translator, $this->hashService);
 
         if (count($inlineKeyboard) === 1) {
+            $resultText = $this->translator->trans('commands.no-tasks-to.' . $this->getAction()->value);
+            // ensure we have unique string even for the same state (e.g. user clicks twice and the same message)
+            $resultText .= ' ' . $this->getRandomString();
             $this->viewTasksService->editSentMessage(
                 $_SESSION['message_id'],
                 $chatId,
                 $viewMessage->getText(collect()),
                 $date,
-                $this->translator->trans(
-                    'commands.no-tasks-to.' . $this->getAction()->value,
-                    locale: $_SESSION['locale']
-                )
+                $resultText
             );
             return;
         }
         $this->telegramService->editSentMessageText(
-            $this->translator->trans('commands.specify-task-to.' . $this->getAction()->value,),
+            $this->translator->trans('commands.specify-task-to.' . $this->getAction()->value),
             $chatId,
             $_SESSION['message_id'],
             InlineKeyboardMarkupDTO::make($inlineKeyboard)
@@ -90,5 +92,16 @@ abstract class AbstractViewManageService extends AbstractService
         }
 
         return $inlineKeyboard;
+    }
+
+
+    /**
+     * Returns random spoiler string, which allows to avoid the same message error in Bot API.
+     *
+     * @throws RandomException
+     */
+    private function getRandomString(): string
+    {
+        return '||' . random_int(1, 1000) . '||';
     }
 }

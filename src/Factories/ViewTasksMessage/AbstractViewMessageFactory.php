@@ -32,7 +32,7 @@ abstract class AbstractViewMessageFactory
      */
     public function getText(Collection $tasks): string
     {
-        return $this->header() . $this->body($tasks) . $this->footer();
+        return $this->header() . $this->body($tasks) . $this->footer($tasks);
     }
 
     /**
@@ -82,9 +82,10 @@ abstract class AbstractViewMessageFactory
     }
 
     /**
+     * @param Collection $tasks
      * @return string
      */
-    protected function footer(): string
+    protected function footer(Collection $tasks): string
     {
         $growthMindsetService = new GrowthMindsetService($_ENV['GROWTH_MINDSET_TOKEN']);
 

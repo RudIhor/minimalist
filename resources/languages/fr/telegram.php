@@ -47,19 +47,13 @@ Si vous avez besoin de plus d'assistance ou si vous avez des questions, n'hésit
 EOF;
 
 $eveningReminderText = <<<EOF
-Bonsoir! 🌇
 
-Alors que la journée se termine, c'est un bon moment pour réfléchir à ce que vous avez accompli et vous préparer pour demain.
 
-✅ Terminez les tâches d'aujourd'hui
-Prenez un moment pour revoir et terminer vos tâches d'aujourd'hui.
+*Fait aujourd'hui : %d*
+*N'a pas fait aujourd'hui : %d*
 
-🔮 Planifiez pour demain et l'avenir
-
-/tomorrow: Planifiez vos tâches pour demain et préparez-vous à une journée réussie.
-/future: Organisez vos tâches pour les dates futures et assurez-vous que rien d'important ne passe à travers les mailles du filet.
-
-Être organisé maintenant rend tout plus facile demain. Vous pouvez le faire! 💪✨
+/demain : planifiez vos tâches pour demain.
+/futur : organisez vos tâches pour des dates ultérieures.
 EOF;
 
 
@@ -89,18 +83,20 @@ return [
             'invalid' => [
                 'title' => [
                     'length' => "||(QID: 2)||\n 🚫 Erreur : Le titre de la tâche doit comporter entre 3 et 100 caractères.",
-                    'characters' => "||(QID: 6)||\n 🚫 Erreur : Le titre de la tâche ne peut pas contenir de caractères spéciaux tels que des soulignements (_) ou des astérisques (*)."
+                    'characters' => "||(QID: 6)||\n 🚫 Erreur : Le titre de la tâche ne peut pas contenir de caractères spéciaux tels que des soulignements ou des astérisques."
                 ],
                 'date-format' => "||(QID: 4)||\n 🚫 Erreur : Format de date invalide. Veuillez utiliser le format JJ.MM (par exemple, 12.01 pour le 12 janvier).",
-                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Erreur : La date est soit invalide, soit passée. Veuillez entrer une date future valide dans l'année. " . date('Y'),
+                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Erreur : La date est soit invalide, soit passée. Veuillez entrer une date future valide dans l'année. " . date(
+                        'Y'
+                    ),
+            ],
+            'business' => [
+                'user-exceeded-daily-limit' => sprintf(
+                    '🚫 Désolé, vous avez dépassé votre limite de %d tâches par jour. Vous voulez en ajouter plus? Passez à Premium! /premium',
+                    TaskLimit::DefaultUser->value
+                ),
             ],
         ],
-        'business' => [
-            'user-exceeded-daily-limit' => sprintf(
-                '🚫 Désolé, vous avez dépassé votre limite de %d tâches par jour. Vous voulez en ajouter plus? Passez à Premium! /premium',
-                TaskLimit::DefaultUser->value
-            ),
-        ]
     ],
     'reminders' => [
         'evening' => $eveningReminderText,
