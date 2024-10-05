@@ -40,7 +40,10 @@ class AddTaskService extends AbstractService
         parent::run($date, $chatId);
         if ($this->isUserExceededDailyLimit($date)) {
             $this->telegramService->sendMessage(
-                $this->translator->trans('errors.business.user-exceeded-daily-limit'),
+                $this->translator->trans(
+                    'validation.errors.business.user-exceeded-daily-limit',
+                    locale: $_SESSION['locale']
+                ),
                 $_SESSION['chat_id'],
             );
 
@@ -102,6 +105,6 @@ class AddTaskService extends AbstractService
         $user = User::byChatId($_SESSION['chat_id'])->first();
         $userTasks = $user->tasks()->byDate($date)->get();
 
-        return count($userTasks) >= TaskLimit::getLimit($user->is_premium);
+        return count($userTasks) >= TaskLimit::getLimit();
     }
 }

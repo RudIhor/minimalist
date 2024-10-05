@@ -47,19 +47,13 @@ If you need more assistance or have any questions, feel free to reach out for su
 EOF;
 
 $eveningReminderText = <<<EOF
-Good evening! 🌇
 
-As the day winds down, it's a great time to reflect on what you've accomplished and get ready for tomorrow.
 
-✅ Complete Today's Tasks
-Take a moment to review and complete your tasks for today.
+*Done today: %d*
+*Haven't done today: %d*
 
-🔮 Plan for Tomorrow and the Future
-
-/tomorrow: Schedule your tasks for tomorrow and set yourself up for a successful day.
-/future: Organize your tasks for future dates and ensure nothing important slips through the cracks.
-
-Keeping things organized now makes everything easier tomorrow. You've got this! 💪✨
+/tomorrow - schedule your tasks for tomorrow.
+/future - organize your tasks for future dates.
 EOF;
 
 
@@ -89,20 +83,20 @@ return [
             'invalid' => [
                 'title' => [
                     'length' => "||(QID: 2)||\n 🚫 Error: The task title must be between 3 and 100 characters.",
-                    'characters' => "||(QID: 6)||\n 🚫 Error: The task title cannot contain special characters like underscores (_) or asterisks (*)."
+                    'characters' => "||(QID: 6)||\n 🚫 Error: The task title cannot contain special characters like underscores or asterisks."
                 ],
                 'date-format' => "||(QID: 4)||\n 🚫 Error: Invalid date format. Please use the format DD.MM (e.g., 12.01 for January 12th).",
                 'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Error: The date is either invalid or in the past. Please enter a valid future date within the year. " . date(
                         'Y'
                     ),
             ],
+            'business' => [
+                'user-exceeded-daily-limit' => sprintf(
+                    '🚫 Sorry, you have exceeded your limit of %d tasks per day. Want to add more? Upgrade to Premium! /premium',
+                    TaskLimit::DefaultUser->value
+                ),
+            ]
         ],
-        'business' => [
-            'user-exceeded-daily-limit' => sprintf(
-                '🚫 Sorry, you have exceeded your limit of %d tasks per day. Want to add more? Upgrade to Premium! /premium',
-                TaskLimit::DefaultUser->value
-            ),
-        ]
     ],
     'reminders' => [
         'evening' => $eveningReminderText,

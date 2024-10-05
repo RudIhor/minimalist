@@ -5,6 +5,7 @@ declare(strict_types=1);
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+use App\Commands\SendAfternoonReminders;
 use App\Commands\SendEveningReminders;
 use App\Commands\SendMorningReminders;
 use App\Commands\SetTelegramCommandsCommand;
@@ -23,6 +24,7 @@ $application->add(new SetTelegramCommandsCommand());
 $application->add(new TestCommand());
 
 $application->add(new SendMorningReminders());
+$application->add(new SendAfternoonReminders());
 $application->add(new SendEveningReminders());
 
 $application->run();

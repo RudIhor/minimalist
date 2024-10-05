@@ -28,7 +28,7 @@ services:
       - "3306:3306"
     volumes:
       - db_data:/var/lib/mysql
-      - ./.docker/mysql/config.cnf:/etc/mysql/conf.d/config.cnf
+      - ./.docker-local/mysql/config.cnf:/etc/mysql/conf.d/config.cnf
     networks:
       - minimalist-db-network
 

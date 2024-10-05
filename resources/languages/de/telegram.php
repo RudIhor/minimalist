@@ -47,19 +47,13 @@ Wenn Sie weitere Unterstützung benötigen oder Fragen haben, wenden Sie sich bi
 EOF;
 
 $eveningReminderText = <<<EOF
-Guten Abend! 🌇
 
-Wenn der Tag zu Ende geht, ist es eine gute Zeit, über das Erreichte nachzudenken und sich auf morgen vorzubereiten.
 
-✅ Erledigen Sie die Aufgaben von heute
-Nehmen Sie sich einen Moment Zeit, um Ihre Aufgaben für heute zu überprüfen und abzuschließen.
+*Heute erledigt: %d*
+*Heute nicht erledigt: %d*
 
-🔮 Planen Sie für morgen und die Zukunft
-
-/tomorrow: Planen Sie Ihre Aufgaben für morgen und bereiten Sie sich auf einen erfolgreichen Tag vor.
-/future: Organisieren Sie Ihre Aufgaben für zukünftige Daten und stellen Sie sicher, dass nichts Wichtiges übersehen wird.
-
-Organisiert zu sein, macht alles morgen einfacher. Sie schaffen das! 💪✨
+/tomorrow – planen Sie Ihre Aufgaben für morgen.
+/future – organisieren Sie Ihre Aufgaben für zukünftige Termine.
 EOF;
 
 
@@ -89,18 +83,20 @@ return [
             'invalid' => [
                 'title' => [
                     'length' => "||(QID: 2)||\n 🚫 Fehler: Der Titel der Aufgabe muss zwischen 3 und 100 Zeichen lang sein.",
-                    'characters' => "||(QID: 6)||\n 🚫 Fehler: Der Titel der Aufgabe darf keine Sonderzeichen wie Unterstriche (_) oder Sternchen (*) enthalten."
+                    'characters' => "||(QID: 6)||\n 🚫 Fehler: Der Titel der Aufgabe darf keine Sonderzeichen wie Unterstriche oder Sternchen enthalten."
                 ],
                 'date-format' => "||(QID: 4)||\n 🚫 Fehler: Ungültiges Datumsformat. Bitte verwenden Sie das Format TT.MM (z. B. 12.01 für den 12. Januar).",
-                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Fehler: Das Datum ist entweder ungültig oder liegt in der Vergangenheit. Bitte geben Sie ein gültiges zukünftiges Datum innerhalb des Jahres ein. " . date('Y'),
+                'date-in-past-or-invalid' => "||(QID: 5)||\n 🚫 Fehler: Das Datum ist entweder ungültig oder liegt in der Vergangenheit. Bitte geben Sie ein gültiges zukünftiges Datum innerhalb des Jahres ein. " . date(
+                        'Y'
+                    ),
+            ],
+            'business' => [
+                'user-exceeded-daily-limit' => sprintf(
+                    '🚫 Entschuldigung, Sie haben Ihr Limit von %d Aufgaben pro Tag überschritten. Möchten Sie mehr hinzufügen? Upgrade auf Premium! /premium',
+                    TaskLimit::DefaultUser->value
+                ),
             ],
         ],
-        'business' => [
-            'user-exceeded-daily-limit' => sprintf(
-                '🚫 Entschuldigung, Sie haben Ihr Limit von %d Aufgaben pro Tag überschritten. Möchten Sie mehr hinzufügen? Upgrade auf Premium! /premium',
-                TaskLimit::DefaultUser->value
-            ),
-        ]
     ],
     'reminders' => [
         'evening' => $eveningReminderText,

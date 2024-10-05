@@ -8,8 +8,18 @@ use Illuminate\Support\Collection;
 
 class EveningViewMessage extends AbstractViewMessageFactory
 {
-    public function getText(Collection $tasks): string
+    public function footer(Collection $tasks): string
     {
-        return $this->translator->trans('reminders.evening', locale: $this->locale);
+        $completedTasksCount = $tasks->filter(fn($task) => $task->is_completed)->count();
+        $uncompletedTasksCount = $tasks->filter(fn($task) => !$task->is_completed)->count();
+
+        return sprintf(
+            $this->translator->trans(
+                'reminders.evening',
+                locale: $this->locale
+            ),
+            $completedTasksCount,
+            $uncompletedTasksCount
+        );
     }
 }
