@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Actions\Task\CopyTaskToTomorrowAction;
+use App\Actions\Task\CopyTaskToNextDayAction;
 use App\Factories\ViewTasksMessage\DefaultViewMessage;
 use App\Models\Task;
 use App\Models\TemporaryLog;
@@ -38,7 +38,7 @@ class CopyTaskToTomorrowService
     {
         // TODO: DRY
         $log = TemporaryLog::byChatId($_SESSION['chat_id'])->first();
-        (new CopyTaskToTomorrowAction())->handle($id);
+        (new CopyTaskToNextDayAction())->handle($id);
         $tasks = Task::byChatId($_SESSION['chat_id'])->byDate($log->date)->get();
         $viewMessage = new DefaultViewMessage(
             $log->date,

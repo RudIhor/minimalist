@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace App\Actions\Task;
 
-use App\Enums\Emoji;
 use App\Models\Task;
 use App\Services\HashService;
 use Carbon\Carbon;
 
-class CopyTaskToTomorrowAction
+class CopyTaskToNextDayAction
 {
     private HashService $hashService;
 
@@ -28,7 +27,7 @@ class CopyTaskToTomorrowAction
 
         return (new CreateTaskAction())->handle([
             'title' => $this->hashService->decrypt($oldTask->title),
-            'date' => Carbon::tomorrow(),
+            'date' => (new Carbon($oldTask->date))->addDay(),
             'chat_id' => $oldTask->chat_id,
         ]);
     }
