@@ -19,7 +19,7 @@ class FutureCommand extends AbstractCommand
     public function execute(Update $update): void
     {
         $result = $this->telegramService->sendMessage(
-            $this->translator->trans('ask-future-date-for-tasks'),
+            $this->translator->trans('ask-future-date-for-tasks', locale: $_SESSION['locale']),
             $update->message->chat->id,
             ForceReplyDTO::make(true)
         );

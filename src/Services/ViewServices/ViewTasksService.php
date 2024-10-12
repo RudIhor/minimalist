@@ -22,7 +22,7 @@ class ViewTasksService extends AbstractService
      */
     public function sendNewMessage(int $chatId, string $text, Carbon $date): void
     {
-        $messageId = $this->telegramService->loading('_Loading..._', $chatId);
+        $messageId = $this->telegramService->loading('_..._', $chatId);
 
         TemporaryLog::updateOrCreate([
             'chat_id' => $chatId,

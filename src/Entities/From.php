@@ -10,12 +10,19 @@ readonly class From
         public int $id,
         public bool $isBot,
         public string $firstName,
-        public ?string $username
+        public ?string $username,
+        public ?string $languageCode,
     ) {
     }
 
     public static function from(array $data): From
     {
-        return new self($data['id'], $data['is_bot'], $data['first_name'], $data['username'] ?? null);
+        return new self(
+            $data['id'],
+            $data['is_bot'],
+            $data['first_name'],
+            $data['username'] ?? null,
+            $data['language_code'] ?? null,
+        );
     }
 }

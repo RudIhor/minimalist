@@ -40,6 +40,10 @@ readonly class WebhookHandler
         $this->translator = $app->getContainer()->get(TranslatorInterface::class);
         try {
             $this->update = Update::from($data);
+            $_SESSION['chat_id'] = $this->update->message?->chat->id ?? $this->update->callbackQuery?->message->chat->id;
+            $user = User::byChatId($_SESSION['chat_id']);
+            $languageCode = $this->update->message?->from->languageCode ?? $this->update->callbackQuery->from->languageCode;
+            $user->update(['language_code' => $languageCode]);
         } catch (TelegramException $e) {
             $this->telegramService->sendMessage(
                 $this->translator->trans($e->getMessage(), locale: $data['message']['from']['language_code']),
@@ -53,10 +57,7 @@ readonly class WebhookHandler
                 );
             }
         }
-        $_SESSION['chat_id'] = $this->update->message?->chat->id ?? $this->update->callbackQuery?->message->chat->id;
-        $_SESSION['locale'] = $this->update->message?->from->languageCode ?? User::byChatId(
-            $_SESSION['chat_id']
-        )->first()->language_code;
+        $_SESSION['locale'] = $user->first()->language_code; // $user always must be at this point
         $_SESSION['message_id'] = $this->update->callbackQuery?->message?->id;
     }
 

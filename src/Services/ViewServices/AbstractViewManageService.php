@@ -57,7 +57,7 @@ abstract class AbstractViewManageService extends AbstractService
             return;
         }
         $this->telegramService->editSentMessageText(
-            $this->translator->trans('commands.specify-task-to.' . $this->getAction()->value),
+            $this->translator->trans('commands.specify-task-to.' . $this->getAction()->value, locale: $_SESSION['locale']),
             $chatId,
             $_SESSION['message_id'],
             InlineKeyboardMarkupDTO::make($inlineKeyboard)
