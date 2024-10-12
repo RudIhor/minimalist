@@ -34,7 +34,7 @@ class StartCommand extends AbstractCommand
         );
 
         $this->telegramService->sendMessage(
-            $this->translator->trans('commands.start'),
+            $this->translator->trans('commands.start', locale: $_SESSION['locale']),
             $update->message->chat->id
         );
     }

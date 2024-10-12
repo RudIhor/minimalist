@@ -55,7 +55,10 @@ abstract class AbstractValidator
         ]);
 
         $data = $this->telegramService->sendMessage(
-            $this->translator->trans(sprintf('validation.errors.invalid.' . $attribute, $args)),
+            $this->translator->trans(
+                sprintf('validation.errors.invalid.' . $attribute, $args),
+                locale: $_SESSION['locale']
+            ),
             $_SESSION['chat_id'],
             ForceReplyDTO::make(true),
         );

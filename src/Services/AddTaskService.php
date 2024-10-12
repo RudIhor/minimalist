@@ -38,25 +38,28 @@ class AddTaskService extends AbstractService
     {
         // TODO: move $_SESSION['chat_id'] class and use DI
         parent::run($date, $chatId);
+        $chatId = $_SESSION['chat_id'];
+        $locale = User::byChatId($chatId)->first()->language_code;
+
         if ($this->isUserExceededDailyLimit($date)) {
             $this->telegramService->sendMessage(
                 $this->translator->trans(
                     'validation.errors.business.user-exceeded-daily-limit',
-                    locale: $_SESSION['locale']
+                    locale: $locale,
                 ),
-                $_SESSION['chat_id'],
+                $chatId,
             );
 
             return;
         }
 
         $data = $this->telegramService->sendMessage(
-            $this->translator->trans('ask-task-title'),
-            $_SESSION['chat_id'],
+            $this->translator->trans('ask-task-title', locale: $locale),
+            $chatId,
             ForceReplyDTO::make(true)
         );
         TemporaryLog::updateOrCreate([
-            'chat_id' => $_SESSION['chat_id'],
+            'chat_id' => $chatId,
         ], [
             'data' => ['message_id_of_bot_question' => $data['result']['message_id']],
         ]);

@@ -11,7 +11,7 @@ help: ## Display help
 
 .PHONY: dm
 dm: ## Drop merged branches
-	git checkout master && git branch --merged | grep -v \* | xargs git branch -D
+	git checkout dev && git branch --merged | grep -v \* | xargs git branch -D
 
 .PHONY: construct
 build-construct: ## Build images

@@ -35,7 +35,7 @@ class ViewTaskValidator extends AbstractValidator
             current($filteredMatches['month']),
             current($filteredMatches['day'])
         )->locale($_SESSION['locale']);
-        if ($date->isPast() || !$date->isCurrentYear()) {
+        if ($date->isPast() || $date->isNextYear()) {
             $this->throwValidationErrorMessage('date-in-past-or-invalid');
 
             return;

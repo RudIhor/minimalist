@@ -40,8 +40,9 @@ abstract class AbstractViewMessageFactory
      */
     protected function header(): string
     {
+        $this->date->locale($_SESSION['locale']);
         return sprintf(
-            $this->translator->trans('commands.view.header', locale: $this->locale),
+            $this->translator->trans('commands.view.header', locale: $_SESSION['locale']),
             $this->date->translatedFormat(self::DATE_FORMAT),
         );
     }
